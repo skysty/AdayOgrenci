@@ -1,0 +1,20 @@
+﻿body {
+    font-family: 'Times New Roman';
+    background-color: gray;
+}
+
+.otinis {
+    background-color: #fff;
+    max-width: 720px;
+    margin: auto;
+    padding: auto;
+}
+
+.letter {
+    padding: 40px;
+}
+
+p {
+    margin: 0px;
+    font-size: 12pt;
+}

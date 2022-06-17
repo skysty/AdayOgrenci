@@ -1,0 +1,80 @@
+﻿@using X.PagedList;
+@using X.PagedList.Mvc;
+@using X.PagedList.Mvc.Core;
+
+@model IPagedList<AdayOgrenci.Entity.Admission>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Aday Öğrenci Başvuru Listesi</h2>
+        </div>
+        <div class="col-md-6">
+            <form class="d-inline-block col-md-10 " asp-controller="Home" asp-action="Search">
+                <div class="d-inline">
+                    <input class="form-control d-inline-block mr-2 w-75" name="oin" type="text" placeholder="Arama" />
+                    <button class="btn btn-primary d-inline float-right" type="submit">Ara</button>
+                </div>
+            </form>
+            <div class="col-md-2 float-right">
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="btn btn-primary float-right ml-2" asp-action="Index" asp-controller="Roles">Roller</a>
+                }
+                
+            </div>
+        </div>
+    </div>
+    <hr />
+
+
+    <table class="table table-bordered table-stripped">
+        <tr>
+            <th>
+                <label>OIN</label>
+            </th>
+            <th>
+                <label>Adı </label>
+            </th>
+            <th>
+                <label>Soyadı</label>
+            </th>
+            <th>
+                <label>Baba Adı</label>
+            </th>
+            <th style="width:140px;"></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.OIN
+                </td>
+                <td>
+                    @item.NameRU
+                </td>
+                <td>
+                    @item.SurnameRU
+                </td>
+                <td>
+                    @item.FatherNameRU
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-sm" asp-action="Index" asp-controller="Admission" asp-route-oin="@item.OIN">Incele</a>
+                </td>
+            </tr>
+        }
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page }),
+    new X.PagedList.Web.Common.PagedListRenderOptions
+        {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }
+    })
+</div>

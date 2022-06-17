@@ -1,0 +1,38 @@
+﻿@model AdayOgrenci.Controllers.DisplayViewModel
+
+@{ }
+
+<div>
+    <h2>Create User</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-controller="Roles" asp-action="CreateUser" method="post">
+                @*<label>UserName</label>*@
+                <input class="form-control w-25 d-inline mr-2" placeholder="Username" name="username" value="" />
+                @*<input type="submit" value="Create User" />*@
+                <button type="submit" class="btn btn-primary">Create User</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-primary float-right" asp-action="Index" asp-controller="Home">Liste</a>
+        </div>
+    </div>
+</div>
+<hr />
+<div>
+    <div>
+        <h2>Role List</h2>
+        <ul>
+            @foreach (var role in Model.Roles)
+            {
+<li>
+    @role
+</li>
+       }
+        </ul>
+    </div>
+    <partial name="_CreateRole" model="new AdayOgrenci.Controllers.RoleViewModel()">
+</div>
+<div>
+    <partial name="_AddUserToRole" model="new AdayOgrenci.Controllers.UpdateUserRoleViewModel() { Users = Model.Users, Roles = Model.Roles }">
+</div>

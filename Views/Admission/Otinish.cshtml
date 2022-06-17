@@ -1,0 +1,308 @@
+﻿@model IEnumerable<AdmissionsModel>
+@using Microsoft.AspNetCore.Identity;
+@{
+    Layout =null;
+}
+@inject UserManager<AdayOgrenci.Areas.Identity.Data.ApplicationUser> UserManager
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        
+        <title>International Kazakh-Turkish University by named Akhmet Yassawi</title>
+        <style type="text/css">
+        body { 
+            font-family:'Times New Roman'; 
+            background-color: gray;
+           
+             
+        }
+        .otinis{
+           background-color: #fff;
+           max-width: 720px;
+           margin: auto;
+           padding: auto;
+        }
+        .letter{
+            padding: 40px;
+        }
+        p { 
+            margin:0px;
+            font-size:12pt;
+        }
+        .underline{
+            text-decoration:underline;
+            font-weight:600
+        }
+        </style>
+    </head>
+    <body>
+        <div class="otinis">
+            <div class="letter">
+                    <p style="margin-left:283.2pt; ">
+                        <span style="font-weight:bold">Қожа Ахмет Ясауи атындағы Халықаралық қазақ-түрік университетінің ректоры</span>
+                    </p>
+                    <p style="margin-left:283.2pt; ">
+                        <span style="font-weight:bold">Ж.Темірбековаға</span>
+                    </p>
+                    <p style="margin-left:247.8pt; ">
+                        <span style="font-weight:bold; -aw-import:ignore">&#xa0;</span>
+                    </p>
+                    <p>
+                        <span style="-aw-import:ignore">&#xa0;</span>
+                    </p>
+                    <p style="text-align:center; ">
+                        <span style="font-weight:bold">Өтініш</span>
+                    </p>
+                    <p style="text-indent:35.4pt;">
+                        <span style="-aw-import:ignore">
+                            &#xa0;
+                        </span>
+                    </p>
+                    <p style="text-indent:35.4pt; text-align:justify; ">
+                        <span>
+                            Мені Қожа Ахмет Ясауи атындағы Халықаралық қазақ-түрік университетінің күндізгі оқыту нысыны бойынша 
+                            <span class="underline">
+                                1/2 
+                                </span>негізінде 
+                        </span>
+
+                    </p>
+                        <p style="margin-left:90pt; text-indent:35.4pt; text-align:justify; font-size:8pt">
+                            <span>
+                                (толық, қысқартылған) / грант, ақылы, Түркия квотасы 
+                            </span>
+                        </p>
+                        <p style="text-align:justify; ">
+                            <span>
+                                 студент қатарына қабылдауыңызды сұраймын
+                            </span>
+                        </p>
+                        <p style="text-align:justify; ">
+                            <span style="-aw-import:ignore">&#xa0;</span>
+                        </p>
+                        @foreach (var item in Model){
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span>
+                                Талапкердің аты-жөні:
+                                <span class="underline">
+                                 @item.NameRU @item.FatherNameRU @item.SurnameRU 
+                                </span>
+                            </span>
+                        </p>
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span>
+                                Жынысы:
+                                <span class="underline">
+                                @item.Sex
+                                </span>
+                            </span>
+                            <span style="-aw-import:spaces">&#xa0; </span>
+                            <span>
+                                Ұлты:
+                                <span class="underline">
+                                       @item.Etnicity
+                                </span>
+                                    
+                            </span>
+                        </p>
+                        
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span>
+                                Туған күні, айы, жылы:
+                                <span class="underline">
+                                    @item.Birthday
+                               </span>
+                            </span>
+                        </p>
+                        <p style="line-height:150%; ">
+                            <span>Жеке куәлік / Паспор №
+                                <span class="underline">
+                                    @item.PassportNo
+                                </span>
+                                <span style="-aw-import:spaces"> &#xa0;&#xa0;&#xa0;</span>
+                                ЖСН:
+                                <span class="underline">
+                                    @item.OIN
+                                </span>
+                                </span>
+                        </p>
+                        <p style="text-align:justify; line-height:150%;">
+                            <span>
+                                Ұялы телефоны:
+                                <span class="underline">
+                                   @item.Phone  
+                                </span>
+                                <span style="-aw-import:spaces"> &#xa0;&#xa0;&#xa0;</span>
+                                 Поштасы:
+                                <span class="underline">
+                               @item.Mail 
+                                </span>
+                            </span>
+                        </p>
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span>
+                                Бітірген оқу орнының аты, жылы
+                                <span class="underline">
+                                11
+                                </span>
+                                <span class="underline">
+                                    ffhfffhf
+                                </span>
+                            </span>
+                        </p>
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span>ҰБТ сертификат №
+                                <span class="underline">
+                                     @item.CertificateNo, @item.CertificateDate
+                                </span>
+                            </span>
+                            <span style="-aw-import:spaces"> &#xa0;&#xa0;&#xa0;</span>
+                            <span>ТЖК №
+                                <span class="underline">
+                                     @item.TJK
+                                </span>
+                            </span>
+                        </p>
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span>
+                                Грант куәлігінің № 
+                                <span class="underline">
+                                    @item.GrantNo
+                                </span>
+                            </span>
+                           @* <span style="text-decoration:underline">жоқ</span>
+                            <span>____________ </span>*@
+                        </p>
+                        }
+                        @foreach(var it in Model){
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span>
+                                Жалпы ҰБТ балы
+                                <span class="underline">
+                                   @it.Score
+                                </span>
+                                <span style="-aw-import:spaces"> &#xa0;&#xa0;&#xa0;</span>
+                                Аттестаттың немесе дипломның орташа балы 
+                                <span class="underline"> 
+                                    _____16_____
+                                </span>
+                            </span>
+                        </p>
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span>
+                                Бейіндік пәндері:
+                                <span class="underline">
+                                    1__________17_____________ 2____________18______________
+                                </span>
+                            </span>
+                        </p>
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span>
+                                Таңдаған білім беру бағдарламасының тобы:
+                                 <span class="underline"> 
+                                     ________19_____________________
+                                 </span>
+                            </span>
+                           
+                        </p>
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span>Білім беру бағдарламасының атауы:
+                                <span class="underline">
+                                    _______20_______________________________
+                                </span>
+                            </span>
+                        </p>
+                        }
+                        @foreach (var item in Model)
+                       {
+                           <p style="text-align:justify; line-height:150%; ">
+                            <span>
+                                Әкесі:
+                                <span class="underline">
+                                     ___________________________________________________________________
+                                </span>
+                            </span>
+                        </p>
+                        <p style="margin-left:177pt; text-indent:35.4pt; text-align:justify; font-size:8pt; font-weight: bold;">
+                             <span>(Аты-жөні)</span>
+                        </p>
+                        
+                            <span>&#xad;</span>
+                            <span>&#xad;</span>
+                            <span>&#xad;</span>
+                            <span>&#xad;</span>
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span class="underline">
+                                ______________________________________________________________________
+                            </span>
+                        </p>
+                        <p style="text-indent:35.4pt; text-align:justify; font-size:8pt; font-weight: bold;">
+                               <span>(Қызметі орны, қызметі, ұялы телефоны)</span>
+                        </p>
+                        <p style="text-align:justify">
+                            <span style="-aw-import:ignore">
+                                &#xa0;
+                            </span>
+                        </p>
+                       }
+                        
+                        @foreach (var item in Model)
+                       {
+                           <p style="text-align:justify; line-height:150%; ">
+                            <span>Анасы: 
+                                <span class="underline">
+                                    _________________________________________________________________
+                                </span>
+                            </span>
+                        </p>
+                        <p style="margin-left:177pt; text-indent:35.4pt; text-align:justify; font-size:8pt; font-weight: bold;">
+                                <span>(Аты-жөні)</span>
+                        </p>
+                        
+                        <p style="text-align:justify; ">
+                            <span style="-aw-import:ignore">&#xa0;</span>
+                        </p>
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span class="underline">
+                                ________________________________________________________________________
+                            </span>
+                        </p>
+                        <p style="text-indent:35.4pt; text-align:justify; font-size:8pt; font-weight: bold;">
+                                <span>(Қызметі орны, қызметі, ұялы телефоны)</span>
+                        </p>
+                     
+                        <p style="text-align:justify">
+                            <span style="-aw-import:ignore">&#xa0;</span>
+                        </p>
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span>Мекен-жайы:
+                                <span class="underline">
+                                    ___________________________________________________________
+                                </span>
+                            </span>
+                        </p>
+                        <p style="text-align:justify; line-height:150%; ">
+                            <span>
+                                Отбасындағы бала саны:
+                                <span class="underline">
+                                    ________________
+                                </span>
+                            </span>
+                        </p>
+                        <p style="text-align:justify; ">
+                            <span>Жеңілдігі: ________________________________________</span>
+                        </p>
+                        <p style="margin-left:35.4pt; text-indent:35.4pt; text-align:justify; font-size:10pt">
+                            <span>Тұл жетім, жартылай жетім, І, ІІ және бала кезінен мүгедек </span>
+                        </p>
+                        
+                        <p style="margin-left:212.4pt; text-indent:35.4pt; text-align:justify; line-height:150%; ">
+                            <span>Талапкердің қолы: __________________</span>
+                        </p>
+                       }
+                        
+            </div>
+        </div>
+    </body>
+</html>

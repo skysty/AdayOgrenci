@@ -1,0 +1,12 @@
+﻿@model AdayOgrenci.Controllers.RoleViewModel
+
+
+<div>
+    <form asp-controller="Roles" asp-action="CreateRole" method="post">
+        @*<label>Create new Role</label>*@
+        <input asp-for="Name" class="form-control w-25 d-inline mr-2" placeholder="Create new Role" />
+        @*<input type="submit" value="Create" />*@
+        <button class="btn btn-primary" type="submit">Create</button>
+    </form>
+</div>
+<hr />

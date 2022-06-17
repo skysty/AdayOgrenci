@@ -1,0 +1,423 @@
+﻿@model AdmissionViewModel
+
+@using Microsoft.AspNetCore.Identity;
+
+@{
+    ViewData["Title"] = "Admission";
+
+}
+
+@inject UserManager<AdayOgrenci.Areas.Identity.Data.ApplicationUser> UserManager
+
+<h3 class="text-center mb-3">Aday Öğrenci Başvuru Formu</h3>
+<form method="post" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <h5> Kişisel Bilgiler </h5>
+        <hr />
+        @*inputların içine sadece required yazarak validationı halledebilirim uğraşıp tek tek özellik yazmaya gerek yok!! *@
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="OIN" placeholder="OIN" value="@Model.OIN" class="form-control" readonly="readonly" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="PassportNo" placeholder="Pasaport No" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                @*<select class="form-control w-100" asp-for="Nation" aria-label="Default select example">*@
+                <input list="nation" placeholder="Uyruk" class="form-control w-100" asp-for="Nation" />
+                <datalist id="nation">
+                    @foreach (var item in Model.Countries)
+                    {
+                        <option value=@item.Id>@item.CountryName</option>
+                    }
+                </datalist>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                @*<select class="form-control w-100" asp-for="FromCountry" aria-label="Default select example">*@
+                <input list="fromCountry" placeholder="Geldiğiniz ülke" class="form-control w-100" asp-for="FromCountry" />
+                <datalist id="fromCountry">
+                    @foreach (var item in Model.Countries)
+                    {
+                        <option value=@item.Id>@item.CountryName</option>
+                    }
+                </datalist>
+            </div>
+            <div class="col-md-4">
+                @*<input asp-for="City" placeholder="Şehir" class="form-control" />*@
+                <input list="city" placeholder="İl" class="form-control w-100" asp-for="City" />
+                <datalist id="city">
+                    <option value="İstanbul">İstanbul</option>
+                    <option value="İzmir">İzmir</option>
+                    <option value="Adana">Adana</option>
+                    <option value="İzmit">İzmit</option>
+                </datalist>
+            </div>
+            <div class="col-md-4">
+                @*<input asp-for="CityType" placeholder="Yerleşim tipi" class="form-control" />*@
+                <input list="district" placeholder="İlçe" class="form-control w-100" asp-for="District" />
+                <datalist id="district">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </datalist>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="NameEN" placeholder="Adı (Latin)" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="SurnameEN" placeholder="Soyadı (Latin)" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="FatherNameEN" placeholder="Baba adı (Latin)" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="NameRU" placeholder="Adı (Kiril)" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="SurnameRU" placeholder="Soyadı (Kiril)" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="FatherNameRU" placeholder="Baba adı (Kiril)" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                @*<input asp-for="CityType" placeholder="Yerleşim tipi" class="form-control" />*@
+                <input list="cityType" placeholder="Şehir/Bölge" class="form-control w-100" asp-for="CityType" />
+                <datalist id="cityType">
+                    <option value="Köy">Köy</option>
+                    <option value="Kasaba">Kasaba</option>
+                    <option value="Şehir">Şehir</option>
+                </datalist>
+            </div>
+            <div class="col-md-4">
+                @*<input asp-for="Sex" placeholder="Cinsiyet" class="form-control" />*@
+                <input list="sex" placeholder="Cinsiyet" class="form-control w-100" asp-for="Sex" />
+                <datalist id="sex">
+                    <option value="Erkek"></option>
+                    <option value="Kadin"></option>
+                </datalist>
+            </div>
+            <div class="col-md-4">
+                @*<input asp-for="Citizenship" placeholder="Milliyet" class="form-control" />*@
+                <input list="Etnicity" placeholder="Milliyet" class="form-control w-100" asp-for="Etnicity" />
+                <datalist id="Etnicity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </datalist>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-2">
+                <label class="p-1">Doğum Tarihi</label>
+            </div>
+            <div class="col-md-2">
+                <input asp-for="Birthday" type="date" placeholder="Doğum Tarihi" class="form-control" />
+            </div>
+        </div>
+        <hr />
+
+        <h5> Başvuru Bilgileri</h5><hr />
+
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="EducationLanguage" placeholder="Eğitim Dili" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input list="educationType" placeholder="Eğitim Türü" class="form-control w-100" asp-for="EducationType" />
+                <datalist id="educationType">
+                    <option value="1">Gündüz</option>
+                    <option value="2">Akşam</option>
+                </datalist>
+            </div>
+            <div class="col-md-4">
+                <input asp-for="FinanceSource" placeholder="Finans Kaynağı" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input list="grantType" placeholder="Grant Türü" class="form-control w-100" asp-for="GrantType" />
+                <datalist id="grantType">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </datalist>
+            </div>
+            <div class="col-md-4">
+                <input asp-for="GrantNo" placeholder="Grant Sertifika No" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input list="quotaType" placeholder="Kuota Türü" class="form-control w-100" asp-for="QuotaType" />
+                <datalist id="quotaType">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </datalist>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input list="quotaNo" placeholder="Kuota Sertifika No" class="form-control w-100" asp-for="QuotaNo" />
+                <datalist id="quotaNo">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </datalist>
+            </div>
+            <div class="col-md-4">
+                <input asp-for="RegisterType" placeholder="Kayıt Türü NOBD" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input list="studentType" placeholder="Öğrenci Türü" class="form-control w-100" asp-for="StudentType" />
+                <datalist id="studentType">
+                    <option value="1">грант</option>
+                    <option value="2">квота</option>
+                </datalist>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="ProgramDuration" placeholder="Program Süresi" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="ProgramType" placeholder="Program Türü" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="ChoiceName" placeholder="Tercih Adı" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="ChoiceCode" placeholder="Tercih Kodu" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="Profession" placeholder="Uzmanlık" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="CurriculumNo" placeholder="Müfredat No" class="form-control" />
+            </div>
+        </div>
+        <hr />
+
+        <h5> Başvuru Detay</h5><hr />
+
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input list="acceptType" placeholder="Kabul Tip" class="form-control w-100" asp-for="AcceptType" />
+                <datalist id="acceptType">
+                    <option value="1">Sinav</option>
+                    <option value="2">Komisyon</option>
+                </datalist>
+            </div>
+            <div class="col-md-4">
+                <input asp-for="Score" placeholder="Puan" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="CertificateNo" placeholder="Sertifikat No" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-2">
+                <label class="p-1">Sertifika Tarihi</label>
+            </div>
+            <div class="col-md-2">
+                <input asp-for="CertificateDate" type="date" placeholder="Sertifika Tarihi" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="TJK" placeholder="ТЖК/ИКТ" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="LanguageOfExam" placeholder="Sinav Dili" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="ExamOfLesson1" placeholder="Ders sınavı 1" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="ExamOfLesson2" placeholder="Ders sınavı 2" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="ExamOfLesson3" placeholder="Ders sınavı 3" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="ExamOfLesson4" placeholder="Ders sınavı 4" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="ExamOfLesson5" placeholder="Ders sınavı 5" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="ExamOfBranch1" placeholder="Alan sınavı 1" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="ExamOfBranch2" placeholder="Alan sınavı 2" class="form-control" />
+            </div>
+        </div>
+        <hr />
+
+        <h5> Öğrenim Bilgileri</h5><hr />
+
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input list="foreignLanguage" placeholder="Lisede/Okulda okuduğu yabancı dil" class="form-control w-100" asp-for="ForeignLanguage" />
+                <datalist id="foreignLanguage">
+                    <option value="1">İngilizce</option>
+                    <option value="2">Almanca</option>
+                    <option value="3">Rusça</option>
+                    <option value="4">Türkçe</option>
+                    <option value="5">Fransızca</option>
+                </datalist>
+            </div>
+            <div class="col-md-4">
+                <input asp-for="GraduationDocType" placeholder="Mezuniyet Belge Tipi" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="GraduationDegree" placeholder="Mezuniyet Derecesi" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="GraduationScore" placeholder="Mezuniyet Puanı" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="DocumentNo" placeholder="Öğrenim Belge No" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                <label class="p-1">Öğrenim Belge Tarihi</label>
+            </div>
+            <div class="col-md-2">
+                <input asp-for="DocumentDate" type="date" placeholder="Öğrenim Belge Tarihi" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="EducateDescription" placeholder="Öğrenim Tanımı" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="EducateType" placeholder="Öğrenim Tipi" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="PlacementType" placeholder="Öğrenim Yerleşim Tipi" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input list="graduationCity" placeholder="Mezuniyet İl" class="form-control w-100" asp-for="GraduationCity" />
+                <datalist id="graduationCity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </datalist>
+            </div>
+            <div class="col-md-4">
+                <input list="graduationDistrict" placeholder="Mezuniyet İlçe" class="form-control w-100" asp-for="GraduationDistrict" />
+                <datalist id="graduationDistrict">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </datalist>
+            </div>
+        </div>
+        <hr />
+
+        <h5> Adres Bilgileri</h5><hr />
+
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="Phone" placeholder="Telefon" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="PhoneType" placeholder="Telefon Tipi" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="Mail" placeholder="E-Posta" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <input asp-for="Address" placeholder="Adres" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input asp-for="AddressType" placeholder="Adres Tipi" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input list="adressPlacementType" placeholder="Yerleşim Türü" class="form-control w-100" asp-for="AdressPlacementType" />
+                <datalist id="adressPlacementType">
+                    <option value="1">Köy</option>
+                    <option value="2">Kasaba</option>
+                    <option value="3">Şehir</option>
+                </datalist>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <label>Yurtta kalmak istiyor musunuz?</label>
+                <input list="dorm" placeholder="Yurt istiyor mu" class="ml-2" asp-for="Dorm" />
+                <datalist id="dorm">
+                    <option value="Evet">Evet</option>
+                    <option value="Hayır" selected>Hayır</option>
+                </datalist>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-11">
+                @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                {
+                    <a class="btn btn-primary" asp-action="Index" asp-controller="Home">Geri</a>
+                    if (!Model.State)
+                    {
+                        <button type="submit" class="btn btn-primary float-right" asp-route-state="True" onclick="return confirm('Başvuruyu tamamladıktan sonra otomatik olarak sözleşme numarası atanır ve sisteme düşer. Başvuru üzerinde tekrar bir değişiklik yapamayacaksınız. Başvuruyu tamamlama işlemini onaylıyor musunuz?')">Başvuruyu Tamamla</button>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary ml-2" asp-action="Otinish" asp-controller="Admission" asp-route-oin="@Model.OIN">Incele</a>
+                    }
+                }
+            </div>
+            <div class="col-md-1">
+                @*<input type="submit" value="Tamamla" class="btn btn-primary" onclick="return confirm('Başvuruyu tamamladıktan sonra otomatik olarak sözleşme numarası atanır ve sisteme düşer. Başvuru üzerinde tekrar bir değişiklik yapamayacaksınız. Başvuruyu tamamlama işlemini onaylıyor musunuz?')"/>*@
+                @if (!Model.State)
+                {
+                    <button type="submit" class="btn btn-primary float-right ">Kaydet</button>
+                }
+                @*<a asp-action="Detail" asp-controller="Courses" asp-route-id="@ViewBag.Id" class="btn btn-warning">@language.Getkey("FormListesi")</a>*@
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script>
+
+        $(document).ready(function () {
+            checkInput();
+        })
+
+        $('input, select').on('input change', checkInput)
+
+        function checkInput() {
+            $('input, select').each(function () {
+                if ($(this).val() !== '') {
+                    $(this).addClass('valid')
+                } else {
+                    $(this).removeClass('valid')
+                }
+            })
+        }
+        
+    </script>
+}
